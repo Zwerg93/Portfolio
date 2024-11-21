@@ -25,6 +25,7 @@ module.exports = env => ({
     output: {
         filename: 'bundle-[fullhash].js',
         path: path.resolve(__dirname, './dist'),
+        publicPath: '/', // Wichtig: Root-Path setzen
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -36,11 +37,14 @@ module.exports = env => ({
             directory: path.join(__dirname, '/'),
         },
         compress: true,
-        port: 4200,
+        historyApiFallback: {
+            rewrites: [
+                { from: /^\/[^.]*$/, to: '/index.html' }, // Nur "clean URLs" an index.html umleiten
+            ],
+        },
         proxy: {
             '/api': 'http://localhost:8080',
-        }
+        },
+        port: 4200,
     },
-
-
 })
