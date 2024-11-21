@@ -2,7 +2,7 @@
 node_modules/
 
 # Alles unter ./src/app/components/
-src/app/components/
+/src/app/components/
 
 # Betriebssystem-spezifische Dateien
 .DS_Store
